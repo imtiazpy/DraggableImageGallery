@@ -4,7 +4,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 function Box({ children }) {
   return (
-    <div className='border border-[#ccc] p-2'>
+    <div className='border border-[#ccc] p-2 rounded-lg'>
       {children}
     </div>
   );
@@ -20,11 +20,11 @@ const LoadingSkeleton = () => {
       <div className='h-[2px] bg-slate-300'></div>
       <div className="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4 p-8 ">
 
-        <div className='col-span-2 row-span-2 h-full'>
+        <div className='col-span-2 row-span-2 rounded-lg'>
           <Skeleton wrapper={Box} count={1} height={192} />
         </div>
         {Array.from({ length: 10 }).map((_, index) => (
-          <div key={index}>
+          <div key={index} className='rounded-lg'>
             <Skeleton wrapper={Box} count={1} height={192} />
           </div>
         ))}
