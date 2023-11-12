@@ -36,7 +36,7 @@ const DraggableItem = ({ image, index, isSelected, onSelect }) => {
       <div className={`absolute inset-0 ${isSelected ? 'bg-slate-300' : 'bg-black'} opacity-0 transition-opacity duration-300 hover:opacity-50 ${isSelected || isCheckBoxFocused ? 'opacity-50' : ''} shade`}></div>
       <input
         type="checkbox"
-        className="absolute lg:top-5 md:top-4 sm:top-3 top-2 lg:left-5 md:left-4 sm:left-3 left-2 opacity-0 checkbox lg:w-6 md:w-5 w-4 lg:h-6 md:h-5 h-4 cursor-pointer"
+        className="absolute lg:top-5 md:top-4 sm:top-3 top-2 lg:left-5 md:left-4 sm:left-3 left-2 opacity-0 checkbox lg:w-6 md:w-5 w-5 lg:h-6 md:h-5 h-5 cursor-pointer"
         checked={isSelected}
         onChange={handleSelect}
         onMouseEnter={() => setIsCheckBoxFocused(true)}
