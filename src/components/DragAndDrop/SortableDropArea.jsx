@@ -9,19 +9,19 @@ const SortableDropArea = ({ items, handleDragEnd, selectedImages, handleImageSel
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        delay: 100,
+        delay: 10,
         tolerance: 5,
       },
     }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     }),
-    // useSensor(TouchSensor, {
-    //   activationConstraint: {
-    //     delay: 100,
-    //     tolerance: 5,
-    //   },
-    // })
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 10,
+        tolerance: 5,
+      },
+    })
   );
 
   return (

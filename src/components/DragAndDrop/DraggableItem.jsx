@@ -31,7 +31,7 @@ const DraggableItem = ({ image, index, isSelected, onSelect }) => {
       style={{ touchAction: "none", ...style }}
       {...listeners}
       {...attributes}
-      className={`relative rounded-lg overflow-hidden img-wrapper`}
+      className={`relative rounded-lg overflow-hidden img-wrapper border border-slate-400`}
     >
       <div className={`absolute inset-0 ${isSelected ? 'bg-slate-300' : 'bg-black'} opacity-0 transition-opacity duration-300 hover:opacity-50 ${isSelected || isCheckBoxFocused ? 'opacity-50' : ''} shade`}></div>
       <input
@@ -49,8 +49,8 @@ const DraggableItem = ({ image, index, isSelected, onSelect }) => {
         src={image.src}
         alt={image.alt}
         style={{
-          WebkitTouchCallout: "none",
-          WebkitUserSelect: "none",
+          // WebkitTouchCallout: "none",
+          // WebkitUserSelect: "none",
           objectFit: "cover"
         }}
       />
