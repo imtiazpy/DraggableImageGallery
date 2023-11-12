@@ -9,7 +9,7 @@ const SortableDropArea = ({ items, handleDragEnd, selectedImages, handleImageSel
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        delay: 10,
+        delay: 50,
         tolerance: 5,
       },
     }),
@@ -18,7 +18,7 @@ const SortableDropArea = ({ items, handleDragEnd, selectedImages, handleImageSel
     }),
     useSensor(TouchSensor, {
       activationConstraint: {
-        delay: 10,
+        delay: 50,
         tolerance: 5,
       },
     })
