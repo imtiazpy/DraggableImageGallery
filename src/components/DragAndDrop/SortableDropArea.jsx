@@ -9,7 +9,7 @@ const SortableDropArea = ({ items, handleDragEnd, selectedImages, handleImageSel
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        delay: 50,
+        delay: 20,
         tolerance: 5,
       },
     }),
@@ -18,7 +18,7 @@ const SortableDropArea = ({ items, handleDragEnd, selectedImages, handleImageSel
     }),
     useSensor(TouchSensor, {
       activationConstraint: {
-        delay: 50,
+        delay: 250,
         tolerance: 5,
       },
     })
@@ -31,7 +31,7 @@ const SortableDropArea = ({ items, handleDragEnd, selectedImages, handleImageSel
           {items.map((image, index) => (
             <div
               key={image.id}
-              className={`${index === 0 && 'col-span-2 row-span-2'} border border-slate-400 rounded-lg`}
+              className={`${index === 0 && 'col-span-2 row-span-2'} border border-slate-400 rounded-lg p-[0.1px]`}
             >
               <DraggableItem
                 image={image}
