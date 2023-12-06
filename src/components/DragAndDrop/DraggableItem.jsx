@@ -36,7 +36,7 @@ const DraggableItem = ({ image }) => {
       style={{ touchAction: "pan-y", ...style }}
       {...listeners}
       {...attributes}
-      className={`relative rounded-md overflow-hidden img-wrapper border border-slate-400`}
+      className={`relative rounded-md overflow-hidden img-wrapper border border-slate-400 img-component`}
     >
       <div className={`absolute inset-0 ${isSelected ? 'bg-slate-300' : 'bg-black'} opacity-0 transition-opacity duration-300 hover:opacity-50 ${isSelected || isCheckBoxFocused ? 'opacity-50' : ''} shade`}></div>
       <input

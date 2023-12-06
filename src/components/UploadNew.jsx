@@ -8,7 +8,7 @@ const UploadNew = ({ handleUploadImage }) => {
 
   return (
     <div
-      className='flex flex-col justify-center items-center gap-4 border border-dashed p-6 cursor-progress border-slate-400 rounded-lg'
+      className='flex flex-col justify-center items-center gap-4 border border-dashed p-6 cursor-progress border-slate-400 rounded-lg img-component'
       onClick={() => fileInput.current.click()}
       title='Upload a new Image'
     >

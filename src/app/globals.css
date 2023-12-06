@@ -29,3 +29,18 @@
 .checkbox:checked {
   opacity: 1;
 }
+
+
+.img-component {
+  aspect-ratio: 1/1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-component img {
+  width: 100%;
+  height: 100%;
+}
