@@ -1,8 +1,8 @@
 const images = [
   {
     id: 1,
-    src: '/images/image-1.webp',
-    alt: 'Image 1',
+    src: '/images/imtiaz.jpg',
+    alt: "Author's image",
   },
   {
     id: 2,
@@ -54,6 +54,11 @@ const images = [
     src: '/images/image-11.jpeg',
     alt: 'Image 11',
   },
+  {
+    id: 12,
+    src: '/images/image-1.webp',
+    alt: 'Image 1',
+  }
 ];
 
 export default images;
