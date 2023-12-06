@@ -1,7 +1,11 @@
-import React, { useRef } from 'react';
+import GlobalContext from '@/context/GlobalContext';
+import React, { useContext, useRef } from 'react';
 
 const UploadNew = ({ handleUploadImage }) => {
   const fileInput = useRef(null);
+
+  const gContext = useContext(GlobalContext);
+
   return (
     <div
       className='flex flex-col justify-center items-center gap-4 border border-dashed p-6 cursor-progress border-slate-400 rounded-lg'
@@ -12,7 +16,7 @@ const UploadNew = ({ handleUploadImage }) => {
         type="file"
         accept="image/*"
         multiple
-        onChange={handleUploadImage}
+        onChange={gContext.handleUploadImage}
         style={{ display: 'none' }}
         ref={fileInput}
       />

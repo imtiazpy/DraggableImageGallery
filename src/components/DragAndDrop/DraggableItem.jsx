@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Image from 'next/image';
 
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import GlobalContext from '@/context/GlobalContext';
 
 
-const DraggableItem = ({ image, index, isSelected, onSelect }) => {
+const DraggableItem = ({ image }) => {
   const [isCheckBoxFocused, setIsCheckBoxFocused] = useState(false);
+
+  const gContext = useContext(GlobalContext);
+
+  const isSelected = gContext.selectedImages.includes(image.id)
 
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
     id: image.id,
@@ -22,7 +27,7 @@ const DraggableItem = ({ image, index, isSelected, onSelect }) => {
   };
 
   const handleSelect = () => {
-    onSelect(index);
+    gContext.handleImageSelect(image.id)
   }
 
   return (
@@ -38,7 +43,7 @@ const DraggableItem = ({ image, index, isSelected, onSelect }) => {
         type="checkbox"
         className="absolute lg:top-5 md:top-4 sm:top-3 top-2 lg:left-5 md:left-4 sm:left-3 left-2 opacity-0 checkbox lg:w-6 md:w-5 w-5 lg:h-6 md:h-5 h-5 cursor-pointer"
         checked={isSelected}
-        onChange={handleSelect}
+        onChange={() => handleSelect()}
         onMouseEnter={() => setIsCheckBoxFocused(true)}
         onMouseLeave={() => setIsCheckBoxFocused(false)}
       />
@@ -51,7 +56,8 @@ const DraggableItem = ({ image, index, isSelected, onSelect }) => {
         style={{
           WebkitTouchCallout: "none",
           WebkitUserSelect: "none",
-          objectFit: "cover"
+          objectFit: "cover",
+          opacity: image.id === gContext.activeId ? 0.3 : 1,
         }}
       />
     </div>

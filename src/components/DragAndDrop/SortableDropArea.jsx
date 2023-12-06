@@ -1,10 +1,14 @@
-import React from 'react';
-import { DndContext, KeyboardSensor, PointerSensor, TouchSensor, closestCenter, useSensor, useSensors } from '@dnd-kit/core';
+import React, { useContext } from 'react';
+import { DndContext, DragOverlay, KeyboardSensor, PointerSensor, TouchSensor, closestCenter, defaultDropAnimationSideEffects, useSensor, useSensors } from '@dnd-kit/core';
 import { SortableContext, rectSortingStrategy, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import DraggableItem from './DraggableItem';
 import UploadNew from '../UploadNew';
+import { createPortal } from 'react-dom';
+import GlobalContext from '@/context/GlobalContext';
 
-const SortableDropArea = ({ items, handleDragEnd, selectedImages, handleImageSelect, handleUploadImage }) => {
+const SortableDropArea = () => {
+
+  const gContext = useContext(GlobalContext);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -24,26 +28,56 @@ const SortableDropArea = ({ items, handleDragEnd, selectedImages, handleImageSel
     })
   );
 
+  const getActiveValue = () => {
+    const res = gContext.items.find((item) => item.id === gContext.activeId);
+    return res;
+  };
+
+  const dropAnimation = {
+    sideEffects: defaultDropAnimationSideEffects({
+      styles: {
+        active: {
+          opacity: "0.5",
+        },
+      },
+    }),
+  };
+
   return (
-    <DndContext onDragEnd={handleDragEnd} sensors={sensors} collisionDetection={closestCenter}>
-      <SortableContext items={items} strategy={rectSortingStrategy}>
+    <DndContext
+      onDragStart={({ active }) => {
+        if (!active) {
+          return;
+        }
+        gContext.setActiveId(active.id)
+      }}
+      onDragEnd={gContext.handleDragEnd}
+      sensors={sensors}
+      collisionDetection={closestCenter}
+    >
+      <SortableContext items={gContext.items} strategy={rectSortingStrategy}>
         <div className="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4 lg:p-8 md:p-6 sm:p-4 p-2 ">
-          {items.map((image, index) => (
+          {gContext.items.map((image, index) => (
             <div
               key={image.id}
               className={`${index === 0 && 'col-span-2 row-span-2'} border border-slate-400 rounded-lg p-[0.1px]`}
             >
-              <DraggableItem
-                image={image}
-                index={index}
-                isSelected={selectedImages.includes(index)}
-                onSelect={handleImageSelect}
-              />
+              <DraggableItem image={image} />
             </div>
           ))}
-          <UploadNew handleUploadImage={handleUploadImage} />
+          <UploadNew />
         </div>
       </SortableContext>
+      {createPortal(
+        <DragOverlay adjustScale={true} dropAnimation={dropAnimation}>
+          {gContext.activeId ? (
+            <DraggableItem
+              image={getActiveValue()}
+            />
+          ) : null}
+        </DragOverlay>,
+        document.body
+      )}
     </DndContext>
   );
 };
